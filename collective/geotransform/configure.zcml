@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="collective.geotransform">
+
+  <five:registerPackage package="." initialize=".initialize" />
+  
+  <include package="plone.transformchain" />
+  
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.geotransform"
+      directory="profiles/default"
+      description="Installs the collective.geotransform package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+      
+   <cmf:registerDirectory name="collective_geotransform"/>
+   
+   <adapter factory=".transform.emailObfuscatorTransform" name="collective.geotransform" />
+    
+</configure>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<object name="portal_skins">
+
+ <object name="collective_geotransform"
+    meta_type="Filesystem Directory View"
+    directory="collective.geotransform:skins/collective_geotransform"/>
+
+ <skin-path name="*">
+  <layer name="collective_geotransform"
+     insert-after="custom"/>
+ </skin-path>
+
+</object>
