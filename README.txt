@@ -9,7 +9,7 @@ collective.geo uses plone.transformchain to transform the response output from Z
 occurences inside the response and transform them into encoded harmless links. This codification is done via a simple base64 encoding, but enough to fool 
 a spam robot. This is the form of the encoded mail link:
 
-<a rel="nofollow" href="contact/dmljdG9yLmZlcm5hbmRlejJAdXBjbmV0LmVz">mymail</a>
+::<a rel="nofollow" href="contact/dmljdG9yLmZlcm5hbmRlejJAdXBjbmV0LmVz">mymail</a>
 
 On the browser side, the encoded links are decoded to their original form by using a Javascript that restore them to normal "mailto:" links.
 
@@ -25,4 +25,4 @@ TODO
 ====
 * Accessibility form and validators
 * Integration tests
-* Further testing   
+* Further testing
