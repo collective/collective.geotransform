@@ -5,7 +5,7 @@ GEO stands for "Gracefully E-mail Obfuscation". This package implements the solu
 
 http://www.alistapart.com/articles/gracefulemailobfuscation/ 
 
-collective.geo uses plone.transformchain to transform the response output from Zope before it reaches your browser. It searches for all "mailto:" 
+collective.geotransform uses plone.transformchain to transform the response output from Zope before it reaches your browser. It searches for all "mailto:" 
 occurences inside the response and transform them into encoded harmless links. This codification is done via a simple base64 encoding, but enough to fool 
 a spam robot. This is the form of the encoded mail link:
 
