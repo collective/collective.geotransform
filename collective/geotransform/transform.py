@@ -3,7 +3,9 @@ import base64
 
 from zope.interface import implements, Interface
 from zope.component import adapts
-
+from zope.component import getMultiAdapter
+from zope.app.component.hooks import getSite
+ 
 from plone.transformchain.interfaces import ITransform
 
 emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,4}\b)\"'
@@ -28,10 +30,14 @@ class emailObfuscatorTransform(object):
         self.request = request
 
     def applyTransform(self):
-        if 'Anonymous' in self.request['AUTHENTICATED_USER'].getUserName():
-            return True
-        else:
+        site = getSite()
+        if not site:
             return False
+        portal_state = getMultiAdapter((site , self.request), name=u"plone_portal_state")
+        if portal_state.anonymous():
+            return False
+        else:
+            return True
 
     def transformBytes(self, result, encoding):
         if self.applyTransform():

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0a3 (unreleased)
+------------------
+
+- Fix check for anonymous
+  [pbauer]
+
 1.0a2 (2010-11-24)
 -------------------
 
