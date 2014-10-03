@@ -4,7 +4,7 @@ import base64
 from zope.interface import implements, Interface
 from zope.component import adapts
 from zope.component import getMultiAdapter
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
  
 from plone.transformchain.interfaces import ITransform
 
