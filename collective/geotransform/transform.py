@@ -35,9 +35,9 @@ class emailObfuscatorTransform(object):
             return False
         portal_state = getMultiAdapter((site , self.request), name=u"plone_portal_state")
         if portal_state.anonymous():
-            return False
-        else:
             return True
+        else:
+            return False
 
     def transformBytes(self, result, encoding):
         if self.applyTransform():
