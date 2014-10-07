@@ -22,7 +22,7 @@ class TestTransform(unittest.TestCase):
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
-        obfuscated_re = r'<a href="mailto:(.)*" rel="nofollow">Mail text</a>'
+        obfuscated_re = r'<a href="geomailto:(.)*" rel="nofollow">Mail text</a>'
 
         # Simple mail link
         mail = """<a href="mailto:me@me.com">Mail text</a>"""

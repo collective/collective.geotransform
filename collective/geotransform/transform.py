@@ -13,11 +13,11 @@ emailRegexp = re.compile(emailregex, re.I | re.S | re.U)
 
 
 def replaceEmail(match):
-    """Replace email strings with mailto: links
+    """Replace email strings with geomailto: links
     """
     url = match.groups()[0]
-    return '"contact/%s" rel="nofollow"' % url
     url = base64.b64encode(url)
+    return '"geomailto:%s" rel="nofollow"' % url
 
 
 class emailObfuscatorTransform(object):
