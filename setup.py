@@ -28,6 +28,9 @@ setup(name='collective.geotransform',
           'plone.transformchain',
           # -*- Extra requirements: -*-
       ],
+      extras_require=dict(
+          test=['plone.app.testing'],
+      ),
       entry_points="""
       # -*- Entry points: -*-
 

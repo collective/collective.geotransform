@@ -6,7 +6,8 @@
  	    inline="False"/>
     
     <javascript cacheable="True" compression="safe" cookable="True"
-        enabled="True" expression="" id="geoMailDecoder.js" 
+        enabled="True" id="geoMailDecoder.js" 
+        expression="python: portal.portal_membership.isAnonymousUser()"
         inline="False"/>
 
 </object>

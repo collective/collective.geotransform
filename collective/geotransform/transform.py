@@ -4,20 +4,20 @@ import base64
 from zope.interface import implements, Interface
 from zope.component import adapts
 from zope.component import getMultiAdapter
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
  
 from plone.transformchain.interfaces import ITransform
 
-emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,4}\b)\"'
+emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,}\b[^\"]*)\"'
 emailRegexp = re.compile(emailregex, re.I | re.S | re.U)
 
 
 def replaceEmail(match):
-    """Replace email strings with mailto: links
+    """Replace email strings with geomailto: links
     """
     url = match.groups()[0]
-    url = base64.urlsafe_b64encode(url)
-    return '"contact/%s" rel="nofollow"' % url
+    url = base64.b64encode(url)
+    return '"geomailto:%s" rel="nofollow"' % url
 
 
 class emailObfuscatorTransform(object):
@@ -35,9 +35,9 @@ class emailObfuscatorTransform(object):
             return False
         portal_state = getMultiAdapter((site , self.request), name=u"plone_portal_state")
         if portal_state.anonymous():
-            return False
-        else:
             return True
+        else:
+            return False
 
     def transformBytes(self, result, encoding):
         if self.applyTransform():
