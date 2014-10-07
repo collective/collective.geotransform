@@ -8,7 +8,7 @@ from zope.component.hooks import getSite
  
 from plone.transformchain.interfaces import ITransform
 
-emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,4}\b)\"'
+emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,}\b[^\"]*)\"'
 emailRegexp = re.compile(emailregex, re.I | re.S | re.U)
 
 
