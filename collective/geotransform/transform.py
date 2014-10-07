@@ -16,8 +16,8 @@ def replaceEmail(match):
     """Replace email strings with mailto: links
     """
     url = match.groups()[0]
-    url = base64.urlsafe_b64encode(url)
     return '"contact/%s" rel="nofollow"' % url
+    url = base64.b64encode(url)
 
 
 class emailObfuscatorTransform(object):
