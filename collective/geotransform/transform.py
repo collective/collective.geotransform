@@ -5,7 +5,7 @@ from zope.interface import implements, Interface
 from zope.component import adapts
 from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
- 
+
 from plone.transformchain.interfaces import ITransform
 
 emailregex = r'\"mailto:["=]?(\b[A-Z0-9._%-]+@[A-Z0-9._%-]+\.[A-Z]{2,}\b[^\"]*)\"'
@@ -22,7 +22,7 @@ def replaceEmail(match):
 
 class emailObfuscatorTransform(object):
     implements(ITransform)
-    adapts(Interface, Interface) # any context, any request
+    adapts(Interface, Interface)  # any context, any request
     order = 9000
 
     def __init__(self, published, request):
@@ -33,7 +33,7 @@ class emailObfuscatorTransform(object):
         site = getSite()
         if not site:
             return False
-        portal_state = getMultiAdapter((site , self.request), name=u"plone_portal_state")
+        portal_state = getMultiAdapter((site, self.request), name=u"plone_portal_state")
         if portal_state.anonymous():
             return True
         else:
