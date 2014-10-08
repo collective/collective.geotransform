@@ -4,7 +4,20 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Handle links with subject and / or body (#1)
+  [laulaz]
+
+- Fix check for anonymous (#2) and for portal url (#3)
+  [laulaz]
+
+- Fix getSite location
+  [laulaz]
+
+- Add first tests
+  [laulaz]
+
+- Add buildout and bootstrap
+  [laulaz]
 
 
 1.0a3 (2012-08-03)
@@ -13,10 +26,12 @@ Changelog
 - Fix check for anonymous
   [pbauer]
 
+
 1.0a2 (2010-11-24)
 -------------------
 
 - Fixed broken uploaded file to pypi
+
 
 1.0a1 (2010-10-22)
 -------------------
