@@ -25,12 +25,17 @@ setup(name='collective.geotransform',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'plone.api',
           'plone.transformchain',
+          'beautifulsoup4',
           # -*- Extra requirements: -*-
       ],
-      extras_require=dict(
-          test=['plone.app.testing'],
-      ),
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'plone.app.robotframework',
+          ]
+      },
       entry_points="""
       # -*- Entry points: -*-
 

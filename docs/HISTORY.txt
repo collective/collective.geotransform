@@ -4,6 +4,15 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
+- Obfuscate plain text mails (#8)
+  [laulaz]
+
+- Avoid touching mailto tags content (#4)
+  [laulaz]
+
+- Avoid trying to transform non-HTML requests
+  [laulaz]
+
 - Handle links with subject and / or body (#1)
   [laulaz]
 
@@ -13,7 +22,7 @@ Changelog
 - Fix getSite location
   [laulaz]
 
-- Add first tests
+- Add tests
   [laulaz]
 
 - Add buildout and bootstrap
