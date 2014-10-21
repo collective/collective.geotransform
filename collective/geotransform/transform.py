@@ -66,15 +66,15 @@ class emailObfuscatorTransform(object):
 
     def transformBytes(self, result, encoding):
         if not self.applyTransform():
-            return None
+            return result
         return cryptAllMails(result)
 
     def transformUnicode(self, result, encoding):
         if not self.applyTransform():
-            return None
+            return result
         return cryptAllMails(result)
 
     def transformIterable(self, result, encoding):
         if not self.applyTransform():
-            return None
+            return result
         return [cryptAllMails(r) for r in result]
