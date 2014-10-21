@@ -5,15 +5,17 @@ GEO stands for "Gracefully E-mail Obfuscation". This package implements the solu
 
 http://www.alistapart.com/articles/gracefulemailobfuscation/ 
 
-collective.geotransform uses plone.transformchain to transform the response output from Zope before it reaches your browser. It searches for all "mailto:" 
-occurences inside the response and transform them into encoded harmless links. This codification is done via a simple base64 encoding, but enough to fool 
-a spam robot. This is the form of the encoded mail link:
+collective.geotransform uses plone.transformchain to transform the response output from Zope before it reaches your browser. It searches for all "mailto:" occurences inside the response and transform them into encoded harmless links.
+It also searches for plain email (without links) inside the response and transform them into encrypted spans.
+This codification is done via a simple base64 encoding, but enough to fool a spam robot.
 
-::<a rel="nofollow" href="geomailto:dmljdG9yLmZlcm5hbmRlejJAdXBjbmV0LmVz">mymail</a>
+This is the form of the encoded mail link:
+::<a rel="nofollow" href="geomailto:dmljdG9yLmZlcm5hbmRlejJAdXBjbmV0LmVz">Link text</a>
 
-On the browser side, the encoded links are decoded to their original form by using a Javascript that restore them to normal "mailto:" links.
+While this is the form of the encoded plain mail address:
+::<span class="geomailaddress">dmljdG9yLmZlcm5hbmRlejJAdXBjbmV0LmVz</span>
 
-The text of the link is replaced by the full E-mail specified in the original mailto attribute.
+On the browser side, the encoded links and spans are decoded to their original form by using a Javascript that restore them to normal "mailto:" links and decrypted plain text.
 
 Authenticated responses are NOT affected by this transform. Only anonymous responses are modified. 
 
@@ -24,5 +26,3 @@ Tested only in Plone 4 although is possible that it would run in Plone 3.
 TODO
 ====
 * Accessibility form and validators
-* Integration tests
-* Further testing

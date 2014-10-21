@@ -26,6 +26,7 @@ setup(name='collective.geotransform',
       install_requires=[
           'setuptools',
           'plone.transformchain',
+          'beautifulsoup4',
           # -*- Extra requirements: -*-
       ],
       extras_require={
