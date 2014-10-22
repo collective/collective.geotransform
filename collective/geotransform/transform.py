@@ -54,7 +54,7 @@ class emailObfuscatorTransform(object):
         site = getSite()
         if not site:
             return False
-        responseType = self.request.response['content-type']
+        responseType = self.request.response.getHeader('content-type') or ''
         if not responseType.startswith('text/html') and \
            not responseType.startswith('text/xhtml'):
             return False
