@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0a4 (unreleased)
-------------------
+1.0 (2014-10-22)
+----------------
 
 - Obfuscate plain text mails (#8)
   [laulaz]
