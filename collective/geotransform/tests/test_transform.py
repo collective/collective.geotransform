@@ -19,7 +19,7 @@ class TestTransform(unittest.TestCase):
         logout()
         published = ''
         request = self.layer['request']
-        request.response['content-type'] = 'text/html'
+        request.response['content-type'] = 'text/html;charset=utf-8'
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
@@ -47,7 +47,7 @@ class TestTransform(unittest.TestCase):
         logout()
         published = ''
         request = self.layer['request']
-        request.response['content-type'] = 'text/html'
+        request.response['content-type'] = 'text/html;charset=utf-8'
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
@@ -68,7 +68,7 @@ class TestTransform(unittest.TestCase):
     def testLoggedInTransform(self):
         published = ''
         request = self.layer['request']
-        request.response['content-type'] = 'text/html'
+        request.response['content-type'] = 'text/html;charset=utf-8'
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
@@ -83,7 +83,7 @@ class TestTransform(unittest.TestCase):
     def testNonHTMLTransform(self):
         published = ''
         request = self.layer['request']
-        request.response['content-type'] = 'text/css'
+        request.response['content-type'] = 'text/css;charset=utf-8'
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
