@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 import base64
 from bs4 import BeautifulSoup
@@ -21,7 +22,10 @@ def replaceMailTos(source):
     mailtoTags = soup.select('a[href^=mailto:]')
     for tag in mailtoTags:
         address = tag.get('href')[7:]
-        cryptedAddress = base64.b64encode(address)
+        try:
+            cryptedAddress = base64.b64encode(address)
+        except UnicodeEncodeError:
+            cryptedAddress = base64.b64encode(address.encode('utf8'))
         tag['href'] = "geomailto:%s" % cryptedAddress
         tag['rel'] = "nofollow"
     return str(soup)
