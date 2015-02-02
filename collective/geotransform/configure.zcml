@@ -21,5 +21,15 @@
    <cmf:registerDirectory name="collective_geotransform"/>
    
    <adapter factory=".transform.emailObfuscatorTransform" name="collective.geotransform" />
+
+   
+   <genericsetup:upgradeStep
+       source="*"
+       destination="0001"
+       title="Update profile geotransform"
+       description="Update to profile 0001"
+       profile="collective.geotransform:default"
+       handler=".upgradehandlers.update_profile"
+       />
     
 </configure>
