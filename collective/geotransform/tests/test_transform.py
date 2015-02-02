@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 import unittest2 as unittest
 from zope.component import queryMultiAdapter
@@ -90,3 +91,20 @@ class TestTransform(unittest.TestCase):
         mail = """<html><body><a href="mailto:me@me.com">Mail text</a></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failUnless(mail == obfuscatedMail)
+
+    def testAccentMailTransoform(self):
+        logout()
+        published = ''
+        request = self.layer['request']
+        request.response['content-type'] = 'text/html;charset=utf-8'
+        transformer = queryMultiAdapter((published, request,), ITransform,
+                                        name=u'collective.geotransform')
+
+        obfuscated_re = r'<html><body><a href="geomailto:(.)*" rel="nofollow">Mail text</a></body></html>'
+
+        # Simple mail link
+        mail = """<html><body><a href="mailto:mé@me.com">Mail text</a></body></html>"""
+        obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
+        self.failIf(mail == obfuscatedMail)
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+

@@ -7,6 +7,13 @@ Changelog
 - Add metadata.xml into profile.
   [bsuttor]
 
+- Decode utf8 if accent in mail
+  [bsuttor]
+
+- Add upgradestep for import new metadata.xml
+  [bsuttor]
+
+
 1.0 (2014-10-22)
 ----------------
 
