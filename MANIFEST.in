@@ -1,3 +1,6 @@
 recursive-include collective *
 recursive-include docs *
+include *.py
+include Makefile
+include *.cfg
 global-exclude *.pyc
