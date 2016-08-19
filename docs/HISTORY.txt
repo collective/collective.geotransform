@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.2 (unreleased)
+1.0.2 (2016-08-19)
 ------------------
 
 - Do not obfuscate mails when called from Ajax, because we don't know if they
