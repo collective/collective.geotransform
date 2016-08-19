@@ -62,6 +62,8 @@ class emailObfuscatorTransform(object):
         if not responseType.startswith('text/html') and \
            not responseType.startswith('text/xhtml'):
             return False
+        if self.request.getHeader('X-Requested-With', '') == 'XMLHttpRequest':
+            return False
         portal_state = getMultiAdapter((site, self.request), name=u"plone_portal_state")
         if portal_state.anonymous():
             return True

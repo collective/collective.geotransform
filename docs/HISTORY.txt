@@ -4,7 +4,9 @@ Changelog
 1.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Do not obfuscate mails when called from Ajax, because we don't know if they
+  will be de-obfuscated and that the goal is to fool non-Javascript robots
+  [laulaz]
 
 
 1.0.1 (2015-02-03)
