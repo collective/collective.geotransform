@@ -34,8 +34,9 @@ setup(name='collective.geotransform',
       ],
       extras_require={
           'test': [
-              'plone.app.testing',
+              'plone.app.contenttypes',
               'plone.app.robotframework',
+              'plone.app.testing',
           ]
       },
       entry_points="""
