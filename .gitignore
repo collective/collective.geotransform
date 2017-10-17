@@ -4,7 +4,7 @@ collective.geotransform.egg-info/
 *.pyc
 develop-eggs/
 include/
-lib/
+/lib*
 parts/
 share/
-
+pip-selfcheck.json
