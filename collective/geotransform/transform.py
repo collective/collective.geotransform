@@ -2,6 +2,8 @@
 import re
 import base64
 from bs4 import BeautifulSoup
+from collective.geotransform.interfaces import IGeoTransformLayer
+from plone import api
 
 from zope.interface import implements, Interface
 from zope.component import adapts
@@ -18,7 +20,7 @@ def replaceMailTos(source):
     """
     Replace mailto href strings with encrypted geomailto href strings
     """
-    soup = BeautifulSoup(source)
+    soup = BeautifulSoup(source, 'lxml')
     mailtoTags = soup.select('a[href^=mailto:]')
     for tag in mailtoTags:
         address = tag.get('href')[7:]
@@ -61,17 +63,14 @@ class emailObfuscatorTransform(object):
         site = getSite()
         if not site:
             return False
+        if not IGeoTransformLayer.providedBy(self.request):
+            return False
         responseType = self.request.response.getHeader('content-type') or ''
-        if not responseType.startswith('text/html') and \
-           not responseType.startswith('text/xhtml'):
+        if not responseType.startswith(('text/html', 'text/xhtml')):
             return False
         if self.request.getHeader('X-Requested-With', '') == 'XMLHttpRequest':
             return False
-        portal_state = getMultiAdapter((site, self.request), name=u"plone_portal_state")
-        if portal_state.anonymous():
-            return True
-        else:
-            return False
+        return api.user.is_anonymous()
 
     def transformBytes(self, result, encoding):
         if not self.applyTransform():

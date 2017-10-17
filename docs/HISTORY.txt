@@ -1,10 +1,14 @@
 Changelog
 =========
 
-1.0.4 (unreleased)
+2.0a1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 5 compatibility
+  [tomgross]
+
+- Add browserlayer and uninstall profile (fixes #11)
+  [tomgross]
 
 
 1.0.3 (2017-12-06)

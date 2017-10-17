@@ -4,7 +4,12 @@ collective.geotransform.egg-info/
 *.pyc
 develop-eggs/
 include/
-lib/
+/lib*
 parts/
 share/
-
+p*.json
+Gruntfile.js
+.idea
+/var
+/node_modules
+/temp_resources
