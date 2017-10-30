@@ -9,9 +9,9 @@ from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import applyProfile
 from plone.app.testing import login
 from plone.app.testing import setRoles
-from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
+from plone.app.textfield.value import RichTextValue
 
-import collective.geotransform
+import transaction
 
 TEXT = """
 <h1>Contact me at me@me.com<h1>
@@ -33,15 +33,20 @@ class GeoTransformPackageLayer(PloneSandboxLayer):
         applyProfile(portal, 'collective.geotransform:default')
         setRoles(portal, TEST_USER_ID, ['Manager'])
         login(portal, TEST_USER_NAME)
-        api.content.create(
+        doc = api.content.create(
             type='Document',
             title='Simple Document',
             id='simple-document',
             container=portal,
-            text=TEXT
         )
-        #import pdb; pdb.set_trace()
-        #doc.setText(TEXT)
+        doc.text = RichTextValue(
+            TEXT,
+            'text/html',
+            'text/html',
+        )
+        api.content.transition(doc, 'publish')
+        doc.reindexObject()
+        transaction.commit()
 
 
 COLLECTIVE_GEOTRANSFORM_FIXTURE = GeoTransformPackageLayer()
@@ -53,6 +58,5 @@ COLLECTIVE_GEOTRANSFORM_INTEGRATION_TESTING = IntegrationTesting(
 
 COLLECTIVE_GEOTRANSFORM_ROBOT_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_GEOTRANSFORM_FIXTURE,
-           AUTOLOGIN_LIBRARY_FIXTURE,
            z2.ZSERVER_FIXTURE),
     name="CollectiveGeotransform:Robot")

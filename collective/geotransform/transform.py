@@ -2,6 +2,7 @@
 import re
 import base64
 from bs4 import BeautifulSoup
+from collective.geotransform.interfaces import IGeoTransformLayer
 from plone import api
 
 from zope.interface import implements, Interface
@@ -58,6 +59,8 @@ class emailObfuscatorTransform(object):
     def applyTransform(self):
         site = getSite()
         if not site:
+            return False
+        if not IGeoTransformLayer.providedBy(self.request):
             return False
         responseType = self.request.response.getHeader('content-type') or ''
         if not responseType.startswith(('text/html', 'text/xhtml')):

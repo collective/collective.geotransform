@@ -7,4 +7,9 @@ include/
 /lib*
 parts/
 share/
-pip-selfcheck.json
+p*.json
+Gruntfile.js
+.idea
+/var
+/node_modules
+/temp_resources
