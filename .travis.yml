@@ -5,7 +5,7 @@ cache:
   - eggs
   - downloads
 python:
-  - 2.7
+  - 2.7.14
 matrix:
   fast_finish: true
 install:
