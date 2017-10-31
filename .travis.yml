@@ -10,7 +10,7 @@ matrix:
   fast_finish: true
 install:
   - virtualenv .
-  - bin/pip install -r requirements
+  - bin/pip install -r requirements.txt
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 before_script:
