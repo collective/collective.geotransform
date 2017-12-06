@@ -10,6 +10,9 @@ from plone.app.testing import applyProfile
 from plone.app.testing import login
 from plone.app.testing import setRoles
 from plone.app.textfield.value import RichTextValue
+from plone.registry.interfaces import IRegistry
+from Products.CMFPlone.interfaces import IFilterSchema
+from zope.component import getUtility
 
 import transaction
 
@@ -24,16 +27,9 @@ TEXT = """
 
 
 def remove_inputs_tag_filtering(portal):
-    pc = api.portal.get_tool(name='portal_transforms')
-    transform = getattr(pc, 'safe_html')
-    key = 'valid_tags'
-    tags = transform.get_parameter_value(key)
-    kwargs = {}
-    kwargs[key + '_key'] = tags.keys() + ['input', 'textarea']
-    kwargs[key + '_value'] = [str(s) for s in tags.values()] + ['1', '1']
-    transform.set_parameters(**kwargs)
-    transform._p_changed = True
-    transform.reload()
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(IFilterSchema, prefix='plone')
+    settings.valid_tags = settings.valid_tags + [u'input', u'textarea']
 
 
 class GeoTransformPackageLayer(PloneSandboxLayer):
