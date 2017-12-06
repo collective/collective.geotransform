@@ -10,6 +10,7 @@ Test Teardown  Close all browsers
 
 Scenario: Test emails decryption
      When I go to the document 'simple-document'
+      And I am sure that the inputs with emails are rendered
       And I am sure that the mails were obfuscated by transform
      Then the emails should be readable for user
 
@@ -18,6 +19,11 @@ Scenario: Test emails decryption
 
 I go to the document '${document_title}'
     Go to  ${PLONE_URL}/${document_title}
+
+
+I am sure that the inputs with emails are rendered
+    Element Should Be Visible  css=input#mail-input
+    Element Should Be Visible  css=textarea#mail-textarea
 
 
 I am sure that the mails were obfuscated by transform
@@ -31,3 +37,6 @@ the emails should be readable for user
     Page Should Contain  Contact them
     Page Should Contain Element  xpath=//a[@href='mailto:you@you.com']
     Page Should Contain Element  xpath=//a[@href='mailto:them@them.com?subject=supersub']
+    Page Should Not Contain Element  xpath=//input[@value='<span class=']
+    Page Should Contain Element  xpath=//input[@value='input@other.com']
+    Page Should Contain  textarea@other.com
