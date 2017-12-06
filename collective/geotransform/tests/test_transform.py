@@ -81,6 +81,21 @@ class TestTransform(unittest.TestCase):
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failUnless(mail == obfuscatedMail)
 
+    def testInputsTransform(self):
+        published = ''
+        request = self.layer['request']
+        request.response['content-type'] = 'text/html;charset=utf-8'
+        transformer = queryMultiAdapter((published, request,), ITransform,
+                                        name=u'collective.geotransform')
+
+        mail = """<html><body><input value="mailto:me@me.com" />"""
+        obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
+        self.failUnless(mail == obfuscatedMail)
+
+        mail = """<html><body><textarea>me@me.com</textarea></body></html>"""
+        obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
+        self.failUnless(mail == obfuscatedMail)
+
     def testNonHTMLTransform(self):
         published = ''
         request = self.layer['request']

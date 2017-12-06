@@ -10,7 +10,7 @@ from zope.component.hooks import getSite
 
 from plone.transformchain.interfaces import ITransform
 
-emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)"
+emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|value=.*?>)"
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
 
 
@@ -36,8 +36,11 @@ def replaceMails(match):
     Replace email strings with encrypted <span>
     """
     mail = match.groups()[0]
-    encryptedMail = base64.b64encode(mail)
-    return """<span class="geomailaddress">%s</span>""" % encryptedMail
+    if mail is not None:
+        encryptedMail = base64.b64encode(mail)
+        return """<span class="geomailaddress">%s</span>""" % encryptedMail
+    else:
+        return match.groups()[1]
 
 
 def cryptAllMails(source):
