@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.3 (unreleased)
+1.0.3 (2017-12-06)
 ------------------
 
 - Do not obfuscate mails inside textarea or value="" attribute (#15)
