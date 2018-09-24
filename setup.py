@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0.4.dev0'
+version = '2.0a1.dev0'
 
 setup(name='collective.geotransform',
       version=version,
@@ -12,7 +12,9 @@ setup(name='collective.geotransform',
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 5.1",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
         ],
       keywords='geo email obfuscation Plone Zope',
       author='Victor Fernandez de Alba',
@@ -32,8 +34,9 @@ setup(name='collective.geotransform',
       ],
       extras_require={
           'test': [
-              'plone.app.testing',
+              'plone.app.contenttypes',
               'plone.app.robotframework',
+              'plone.app.testing',
           ]
       },
       entry_points="""
