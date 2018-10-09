@@ -5,14 +5,14 @@ from bs4 import BeautifulSoup
 from collective.geotransform.interfaces import IGeoTransformLayer
 from plone import api
 
-from zope.interface import implements, Interface
-from zope.component import adapts
-from zope.component import getMultiAdapter
+from zope.interface import implementer
+from zope.interface import Interface
+from zope.component import adapter
 from zope.component.hooks import getSite
 
 from plone.transformchain.interfaces import ITransform
 
-emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|value=.*?>)"
+emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|value=.*?>)"  # noqa
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
 
 
@@ -45,19 +45,19 @@ def replaceMails(match):
         return match.groups()[1]
 
 
-def cryptAllMails(source):
-    result = replaceMailTos(source)
-    return emailRegexp.sub(replaceMails, result)
-
-
+@implementer(ITransform)
+@adapter(Interface, Interface)  # any context, any request
 class emailObfuscatorTransform(object):
-    implements(ITransform)
-    adapts(Interface, Interface)  # any context, any request
+
     order = 9000
 
     def __init__(self, published, request):
         self.published = published
         self.request = request
+
+    def _cryptAllMails(self, source):
+        result = replaceMailTos(source)
+        return emailRegexp.sub(replaceMails, result)
 
     def applyTransform(self):
         site = getSite()
@@ -75,14 +75,12 @@ class emailObfuscatorTransform(object):
     def transformBytes(self, result, encoding):
         if not self.applyTransform():
             return result
-        return cryptAllMails(result)
+        return self._cryptAllMails(result)
 
     def transformUnicode(self, result, encoding):
-        if not self.applyTransform():
-            return result
-        return cryptAllMails(result)
+        return self.transformBytes(result, encoding)
 
     def transformIterable(self, result, encoding):
         if not self.applyTransform():
             return result
-        return [cryptAllMails(r) for r in result]
+        return [self._cryptAllMails(r) for r in result]
