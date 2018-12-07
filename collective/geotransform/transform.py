@@ -12,7 +12,7 @@ from zope.component.hooks import getSite
 
 from plone.transformchain.interfaces import ITransform
 
-emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|value=.*?>)"
+emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|(?:value|title)=.*?>)"
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
 
 
