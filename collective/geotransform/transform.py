@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-import re
-import base64
 from bs4 import BeautifulSoup
 from collective.geotransform.interfaces import IGeoTransformLayer
 from plone import api
-
-from zope.interface import implements, Interface
-from zope.component import adapts
-from zope.component import getMultiAdapter
-from zope.component.hooks import getSite
-
 from plone.transformchain.interfaces import ITransform
+from zope.component import adapter
+from zope.component.hooks import getSite
+from zope.interface import implementer, Interface
 
-emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|(?:value|title)=.*?>)"
+import base64
+import re
+import six
+
+emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|(?:value|title)=.*?>)"  # noqa
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
 
 
@@ -21,13 +20,16 @@ def replaceMailTos(source):
     Replace mailto href strings with encrypted geomailto href strings
     """
     soup = BeautifulSoup(source, 'lxml')
-    mailtoTags = soup.select('a[href^=mailto:]')
+    mailtoTags = soup.select('a[href^="mailto:"]')
     for tag in mailtoTags:
         address = tag.get('href')[7:]
-        try:
-            cryptedAddress = base64.b64encode(address)
-        except UnicodeEncodeError:
-            cryptedAddress = base64.b64encode(address.encode('utf8'))
+        if isinstance(address, six.text_type):
+            # base64.b64encode needs bytes in py2 and py3
+            address = address.encode('utf8')
+        cryptedAddress = base64.b64encode(address)
+        if six.PY3:
+            # base64.b64encode returns bytes
+            cryptedAddress = cryptedAddress.decode('utf8')
         tag['href'] = "geomailto:%s" % cryptedAddress
         tag['rel'] = "nofollow"
     return str(soup)
@@ -39,25 +41,32 @@ def replaceMails(match):
     """
     mail = match.groups()[0]
     if mail is not None:
+        if isinstance(mail, six.text_type):
+            mail = mail.encode('utf8')
         encryptedMail = base64.b64encode(mail)
+        if six.PY3:
+            encryptedMail = encryptedMail.decode('utf8')
         return """<span class="geomailaddress">%s</span>""" % encryptedMail
     else:
         return match.groups()[1]
 
 
-def cryptAllMails(source):
-    result = replaceMailTos(source)
-    return emailRegexp.sub(replaceMails, result)
-
-
+@implementer(ITransform)
+@adapter(Interface, Interface)  # any context, any request
 class emailObfuscatorTransform(object):
-    implements(ITransform)
-    adapts(Interface, Interface)  # any context, any request
+
     order = 9000
 
     def __init__(self, published, request):
         self.published = published
         self.request = request
+
+    def _cryptAllMails(self, source):
+        result = replaceMailTos(source)
+        result = emailRegexp.sub(replaceMails, result)
+        if isinstance(result, six.text_type):
+            result = result.encode('utf8')
+        return result
 
     def applyTransform(self):
         site = getSite()
@@ -75,14 +84,12 @@ class emailObfuscatorTransform(object):
     def transformBytes(self, result, encoding):
         if not self.applyTransform():
             return result
-        return cryptAllMails(result)
+        return self._cryptAllMails(result)
 
     def transformUnicode(self, result, encoding):
-        if not self.applyTransform():
-            return result
-        return cryptAllMails(result)
+        return self.transformBytes(result, encoding)
 
     def transformIterable(self, result, encoding):
         if not self.applyTransform():
             return result
-        return [cryptAllMails(r) for r in result]
+        return [self._cryptAllMails(r) for r in result]

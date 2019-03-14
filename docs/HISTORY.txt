@@ -1,10 +1,14 @@
 Changelog
 =========
 
-2.0a2 (unreleased)
+2.0b1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Ignore title attributes which will break html once obfuscated.
+  [tmassmann]
+
+- Add support for Python 3 and Plone 5.2.
+  [pbauer]
 
 
 2.0a1 (2018-09-24)

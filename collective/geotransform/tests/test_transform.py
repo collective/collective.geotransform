@@ -122,4 +122,3 @@ class TestTransform(unittest.TestCase):
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
         self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
-
