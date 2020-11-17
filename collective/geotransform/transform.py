@@ -7,13 +7,16 @@ from plone import api
 
 from zope.interface import implements, Interface
 from zope.component import adapts
-from zope.component import getMultiAdapter
 from zope.component.hooks import getSite
 
 from plone.transformchain.interfaces import ITransform
 
-emailPattern = r"([A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+)|(<textarea.*?<\/textarea>|value=.*?>)"
+emailPattern = r"[A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+"
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
+
+
+def isNotInTextarea(str):
+    return str.parent.name != "textarea"
 
 
 def replaceMailTos(source):
@@ -33,21 +36,27 @@ def replaceMailTos(source):
     return str(soup)
 
 
-def replaceMails(match):
+def replaceMails(source):
     """
     Replace email strings with encrypted <span>
     """
-    mail = match.groups()[0]
-    if mail is not None:
-        encryptedMail = base64.b64encode(mail)
-        return """<span class="geomailaddress">%s</span>""" % encryptedMail
-    else:
-        return match.groups()[1]
+    soup = BeautifulSoup(source, "lxml")
+    texts = soup.find_all(string=isNotInTextarea)
+    for text in texts:
+        mails = emailRegexp.findall(text)
+        for mail in mails:
+            encryptedMail = base64.b64encode(mail)
+            newTag = soup.new_tag("span")
+            newTag["class"] = "geomailaddress"
+            newTag.string = encryptedMail
+            text.replace_with(newTag)
+    return str(soup)
 
 
 def cryptAllMails(source):
     result = replaceMailTos(source)
-    return emailRegexp.sub(replaceMails, result)
+    result = replaceMails(result)
+    return result
 
 
 class emailObfuscatorTransform(object):

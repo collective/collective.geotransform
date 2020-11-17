@@ -4,6 +4,9 @@ Changelog
 2.0a2 (unreleased)
 ------------------
 
+- Make mail detection in texts (outside textareas) more robust
+  [laulaz]
+
 - Improve tests
   [laulaz]
 
