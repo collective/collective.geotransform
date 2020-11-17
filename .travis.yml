@@ -1,13 +1,11 @@
 language: python
+addons:
+  firefox: "62.0.3"
 sudo: false
 cache:
   directories:
   - eggs
   - downloads
-addons:
-  # XXX: use an older Firefox ESR as we are stuck with selenium = 2.53.5
-  #      https://github.com/SeleniumHQ/selenium/issues/2739#issuecomment-249482533
-  firefox: 45.9.0esr
 python:
   - 2.7
 matrix:
@@ -18,9 +16,14 @@ install:
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 before_script:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- firefox -v
+  - firefox -v
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.20.1-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+  - export DISPLAY=:99.0
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - sleep 3
 script:
   - bin/code-analysis
   - bin/test
