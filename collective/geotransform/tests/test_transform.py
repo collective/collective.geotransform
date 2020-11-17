@@ -82,13 +82,14 @@ class TestTransform(unittest.TestCase):
         self.failUnless(mail == obfuscatedMail)
 
     def testInputsTransform(self):
+        logout()
         published = ''
         request = self.layer['request']
         request.response['content-type'] = 'text/html;charset=utf-8'
         transformer = queryMultiAdapter((published, request,), ITransform,
                                         name=u'collective.geotransform')
 
-        mail = """<html><body><input value="mailto:me@me.com" />"""
+        mail = """<html><body><input value="mailto:me@me.com"/></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failUnless(mail == obfuscatedMail)
 
@@ -97,6 +98,7 @@ class TestTransform(unittest.TestCase):
         self.failUnless(mail == obfuscatedMail)
 
     def testNonHTMLTransform(self):
+        logout()
         published = ''
         request = self.layer['request']
         request.response['content-type'] = 'text/css;charset=utf-8'
@@ -122,4 +124,3 @@ class TestTransform(unittest.TestCase):
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
         self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
-

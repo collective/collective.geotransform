@@ -4,7 +4,8 @@ Changelog
 2.0a2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve tests
+  [laulaz]
 
 
 2.0a1 (2018-09-24)
