@@ -15,6 +15,8 @@ emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
 
 
 def isNotInTextarea(str):
+    if str is None:
+        return True
     return str.parent.name != "textarea"
 
 
@@ -48,7 +50,8 @@ def replaceMails(source):
             newTag = soup.new_tag("span")
             newTag["class"] = "geomailaddress"
             newTag.string = encryptedMail
-            text.replace_with(newTag)
+            replaced_text = str(text).replace(mail, str(newTag))
+            text.replace_with(BeautifulSoup(replaced_text, "html.parser"))
     return str(soup)
 
 

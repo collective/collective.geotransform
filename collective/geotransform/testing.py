@@ -20,6 +20,7 @@ TEXT = """
 <a href="mailto:them@them.com?subject=supersub">Contact them</a><br />
 <input id="mail-input" type="text" value="input@other.com" />
 <textarea id="mail-textarea">textarea@other.com</textarea>
+<a href="https://outlook.office365.com/owa/calendar/user@bar.com/bookings/">link</a>
 """
 
 

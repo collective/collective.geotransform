@@ -7,7 +7,7 @@ Changelog
 - Make mail detection in texts (outside textareas) more robust
   [laulaz]
 
-- Improve tests
+- - Improve / add tests
   [laulaz]
 
 
