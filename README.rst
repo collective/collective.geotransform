@@ -1,6 +1,9 @@
 Introduction
 ============
 
+.. image:: https://travis-ci.org/collective/collective.geotransform.svg?branch=master
+    :target: https://travis-ci.org/github/collective/collective.geotransform
+
 GEO stands for "Gracefully E-mail Obfuscation". This package implements the solution exposed in this post of List Apart web site authored by Roel Van Gils:
 
 http://www.alistapart.com/articles/gracefulemailobfuscation/ 
