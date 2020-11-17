@@ -21,10 +21,12 @@ On the browser side, the encoded links and spans are decoded to their original f
 
 Authenticated responses are NOT affected by this transform. Only anonymous responses are modified.
 
-Requirements
-============
+Compatibility
+=============
 
- * Plone 5.x
+The versions 2.x (build from the master-branch) are used in Plone 5.
+
+For support of Plone 4 please use versions 1.x.
 
 TODO
 ====
