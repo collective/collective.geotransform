@@ -49,7 +49,8 @@ def replaceMails(source):
             newTag = soup.new_tag("span")
             newTag["class"] = "geomailaddress"
             newTag.string = encryptedMail
-            text.replace_with(newTag)
+            replaced_text = text.replace(mail, str(newTag))
+            text.replace_with(BeautifulSoup(replaced_text, "html.parser"))
     return str(soup)
 
 

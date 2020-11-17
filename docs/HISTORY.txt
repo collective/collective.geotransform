@@ -4,10 +4,13 @@ Changelog
 2.0a2 (unreleased)
 ------------------
 
+- Fix obfuscation with mails within texts
+  [laulaz]
+
 - Make mail detection in texts (outside textareas) more robust
   [laulaz]
 
-- Improve tests
+- Improve / add tests
   [laulaz]
 
 
