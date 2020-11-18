@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0a2 (unreleased)
-------------------
+2.0 (2020-11-18)
+----------------
 
 - Fix obfuscation with mails within texts
   [laulaz]
