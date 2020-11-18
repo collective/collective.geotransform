@@ -1,13 +1,13 @@
 Changelog
 =========
 
-1.0.4 (unreleased)
+1.0.4 (2020-11-18)
 ------------------
 
 - Make mail detection in texts (outside textareas) more robust
   [laulaz]
 
-- - Improve / add tests
+- Improve / add tests
   [laulaz]
 
 
