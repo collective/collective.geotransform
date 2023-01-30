@@ -1,14 +1,24 @@
 Changelog
 =========
 
-2.0b1 (unreleased)
+2.0.1 (unreleased)
 ------------------
-
-- Ignore title attributes which will break html once obfuscated.
-  [tmassmann]
 
 - Add support for Python 3 and Plone 5.2.
   [pbauer]
+
+
+2.0 (2020-11-18)
+----------------
+
+- Fix obfuscation with mails within texts
+  [laulaz]
+
+- Make mail detection in texts (outside textareas) more robust
+  [laulaz]
+
+- Improve / add tests
+  [laulaz]
 
 
 2.0a1 (2018-09-24)
@@ -19,6 +29,16 @@ Changelog
 
 - Add browserlayer and uninstall profile (fixes #11)
   [tomgross]
+
+
+1.0.4 (2020-11-18)
+------------------
+
+- Make mail detection in texts (outside textareas) more robust
+  [laulaz]
+
+- Improve / add tests
+  [laulaz]
 
 
 1.0.3 (2017-12-06)

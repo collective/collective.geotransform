@@ -1,6 +1,9 @@
 Introduction
 ============
 
+.. image:: https://travis-ci.org/collective/collective.geotransform.svg?branch=master
+    :target: https://travis-ci.org/github/collective/collective.geotransform
+
 GEO stands for "Gracefully E-mail Obfuscation". This package implements the solution exposed in this post of List Apart web site authored by Roel Van Gils:
 
 http://www.alistapart.com/articles/gracefulemailobfuscation/ 
@@ -21,10 +24,12 @@ On the browser side, the encoded links and spans are decoded to their original f
 
 Authenticated responses are NOT affected by this transform. Only anonymous responses are modified.
 
-Requirements
-============
+Compatibility
+=============
 
- * Plone 5.x
+The versions 2.x (build from the master-branch) are used in Plone 5.
+
+For support of Plone 4 please use versions 1.x.
 
 TODO
 ====
