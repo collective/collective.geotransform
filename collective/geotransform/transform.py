@@ -54,6 +54,7 @@ def replaceMails(source):
             encryptedMail = base64.b64encode(mail)
             if six.PY3:
                 encryptedMail = encryptedMail.decode('utf8')
+                mail = mail.decode('utf8')
             newTag = soup.new_tag("span")
             newTag["class"] = "geomailaddress"
             newTag.string = encryptedMail
