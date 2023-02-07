@@ -4,19 +4,14 @@ all: run
 
 BUILDOUT_FILES = bin/buildout buildout.cfg
 
-bootstrap.py:
-	wget http://downloads.buildout.org/2/bootstrap.py
-
-.PHONY: bootstrap buildout run test cleanall
-bin/buildout: bootstrap.py buildout.cfg
-	virtualenv-2.7 .
-	./bin/python bootstrap.py 
+.PHONY: buildout run test cleanall
+bin/buildout: buildout.cfg
+	python3.9 -m venv .
+	./bin/pip install -r requirements.txt
 	touch $@
 
 buildout: bin/buildout
 	bin/buildout -t 5
-
-bootstrap: bin/buildout
 
 run: bin/instance 
 	bin/instance fg
