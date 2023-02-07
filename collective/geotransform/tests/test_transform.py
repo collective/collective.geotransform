@@ -30,19 +30,19 @@ class TestTransform(unittest.TestCase):
         mail = """<html><body><a href="mailto:me@me.com">Mail text</a></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
         # Mail link with subject
         mail = """<html><body><a href="mailto:me@me.com?subject=Test">Mail text</a></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
         # Mail link with subject and body
         mail = """<html><body><a href="mailto:me@me.com?subject=Test&amp;body=Test">Mail text</a></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
     def testPlainMailTransform(self):
         logout()
@@ -57,28 +57,28 @@ class TestTransform(unittest.TestCase):
         mail = """<html><body>me@me.com</body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
         # Simple mail address with text in content
         obfuscated_re = r'<html><body>My address is <span class="geomailaddress">(.)*</span></body></html>'
         mail = """<html><body>My address is me@me.com</body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
         # Multiple mail addresses in content
         obfuscated_re = r'<html><body><h2><span class="geomailaddress">(.)*</span></h2><span class="geomailaddress">(.)*</span></body></html>'
         mail = """<html><body><h2>me@me.com</h2>you@you.com</body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
         # Multiple mail addresses with texts in content
         obfuscated_re = r'<html><body><h2>1 : <span class="geomailaddress">(.)*</span></h2>2 : <span class="geomailaddress">(.)*</span></body></html>'
         mail = """<html><body><h2>1 : me@me.com</h2>2 : you@you.com</body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
 
     def testLoggedInTransform(self):
         published = ''
@@ -105,15 +105,15 @@ class TestTransform(unittest.TestCase):
 
         mail = """<html><body><input value="mailto:me@me.com"/></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
-        self.failUnless(mail == obfuscatedMail)
+        self.failUnless(mail == obfuscatedMail.decode("utf-8"))
 
         mail = """<html><body><textarea>me@me.com</textarea></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
-        self.failUnless(mail == obfuscatedMail)
+        self.failUnless(mail == obfuscatedMail.decode("utf-8"))
 
         mail = """<html><body><textarea>My email is me@me.com</textarea></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
-        self.failUnless(mail == obfuscatedMail)
+        self.failUnless(mail == obfuscatedMail.decode("utf-8"))
 
     def testNonHTMLTransform(self):
         logout()
@@ -141,4 +141,4 @@ class TestTransform(unittest.TestCase):
         mail = """<html><body><a href="mailto:mé@me.com">Mail text</a></body></html>"""
         obfuscatedMail = transformer.transformBytes(mail, 'utf-8')
         self.failIf(mail == obfuscatedMail)
-        self.assertTrue(re.match(obfuscated_re, obfuscatedMail))
+        self.assertTrue(re.match(obfuscated_re, obfuscatedMail.decode("utf-8")))
