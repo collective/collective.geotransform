@@ -27,9 +27,12 @@ Authenticated responses are NOT affected by this transform. Only anonymous respo
 Compatibility
 =============
 
-The versions 2.x (build from the master-branch) are used in Plone 5.
+The versions 3.x (build from the master-branch) are compatible with Plone 6 / Python 3 only.
 
-For support of Plone 4 please use versions 1.x.
+Other branches / versions support old Plone versions :
+ - Plone 5: versions 2.x
+ - Plone 4: versions 1.x
+
 
 TODO
 ====
