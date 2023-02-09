@@ -1,0 +1,62 @@
+name: Tests
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python-version: "3.8"
+            plone-version: "6.0"
+          - python-version: "3.9"
+            plone-version: "6.0"
+          - python-version: "3.10"
+            plone-version: "6.0"
+          - python-version: "3.11"
+            plone-version: "6.0"
+    steps:
+      # git checkout
+      - uses: actions/checkout@v2
+
+      # python setup
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # python eggs cache
+      - name: Cache eggs
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-eggs
+        with:
+          path: ./eggs
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.python-version }}-${{ matrix.plone-version }}
+
+      # python install
+      - name: pip install
+        run: pip install -r requirements_plone-${{ matrix.plone-version }}.x.txt
+
+      # buildout
+      - name: buildout
+        run: buildout -t 10 -c plone-${{ matrix.plone-version }}.x.cfg
+
+      # install firefox for robots testing
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
+        with:
+          firefox-version: '92.0'
+
+      # prepare robots testing
+      - name: Xvfb
+        run: Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
+
+      # run all tests
+      - name: Test
+        env:
+          DISPLAY: :99
+        run: |
+          bin/test --all

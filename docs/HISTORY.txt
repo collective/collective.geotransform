@@ -4,7 +4,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Plone 6 compatibility, drop Plone 5 support
+  [boulch]
 
 
 2.1 (2023-01-31)

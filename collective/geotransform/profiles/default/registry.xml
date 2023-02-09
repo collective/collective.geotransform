@@ -1,33 +1,19 @@
 <?xml version="1.0"?>
 <registry>
-<records prefix="plone.resources/jquery_base64"
-          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-  <value key="js">++plone++geotransform/jquery.base64.min.js</value>
-</records>
-<records prefix="plone.resources/geotransform"
-          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-  <value key="js">++plone++geotransform/geoMailDecoder.js</value>
-  <value key="deps">jquery_base64</value>
-</records>
-  <records prefix="plone.resources/bundle-geotransform"
-          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
-  <value key="js">++plone++geotransform/bundle.js</value>
-</records>
-  <records prefix="plone.bundles/geotransform"
-          interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-  <value key="resources">
-    <!-- reference to bundle resource definition -->
-    <element>bundle-geotransform</element>
-  </value>
-  <value key="merge_with">default</value>
+<records prefix="plone.bundles/jquery_base64"
+         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+  <value key="depends">plone</value>
   <value key="enabled">True</value>
-  <value key="jscompilation">++plone++geotransform/bundle.min.js</value>
-  <value key="last_compilation">2017-10-30 00:00:00</value>
-  <value key="expression">python: member is None</value>
-
-  <!-- so we don't include these modules multiple times -->
-  <value key="stub_js_modules">
-    <element>jquery</element>
-  </value>
+  <value key="jscompilation">++plone++geotransform/jquery.base64.min.js</value>
+  <value key="load_async">False</value>
+  <value key="load_defer">False</value>
+</records>
+<records prefix="plone.bundles/geotransform"
+         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+  <value key="depends">jquery_base64</value>
+  <value key="enabled">True</value>
+  <value key="jscompilation">++plone++geotransform/geoMailDecoder.js</value>
+  <value key="load_async">False</value>
+  <value key="load_defer">False</value>
 </records>
 </registry>
