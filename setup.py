@@ -13,6 +13,7 @@ setup(name='collective.geotransform',
       classifiers=[
         "Framework :: Plone",
         "Framework :: Plone :: 6.0",
+        "Framework :: Plone :: Addon",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
