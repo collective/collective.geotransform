@@ -1,4 +1,4 @@
-recursive-include collective *
+recursive-include src *
 include *.md *.py *.txt *.cfg LICENSE.GPL
 include Makefile
 global-exclude *.pyc .installed.cfg
