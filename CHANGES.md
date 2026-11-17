@@ -2,9 +2,28 @@
 
 <!-- towncrier release notes start -->
 
-## 3.0.1 (unreleased)
+## 4.0.0 (unreleased)
 
-- Nothing changed yet.
+
+- Breaking: replace the `pkg_resources` namespace of `collective` with a
+  PEP 420 native namespace, and move the package to a `src/` layout.
+  Support Plone 6.1 and 6.2 only, on Python 3.10 to 3.13. Use 3.x for
+  Plone 6.0.
+  [remdub]
+
+- Import `safe_text`, `IFilterSchema` and `IBundleRegistry` from
+  `plone.base` instead of the aliases Plone 6.2 deprecates, use
+  `plone.testing.zope` in the test layers, and drop `six`.
+  [remdub]
+
+- Declare the dependencies the code imports.
+  [remdub]
+
+- Configure the package with plone.meta 2.12.0 (test matrix on Plone 6.2.3
+  and 6.1), move its metadata to `pyproject.toml`, convert the documentation
+  to Markdown and run the development environment on Plone 6.2.3 with uv
+  instead of buildout.
+  [remdub]
 
 
 ## 3.0 (2023-02-09)
