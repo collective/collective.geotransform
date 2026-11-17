@@ -35,8 +35,14 @@ authors = [
 ]
 dependencies = [
     "beautifulsoup4",
+    "lxml",
     "plone.api",
+    "plone.base",
     "plone.transformchain",
+    "Products.GenericSetup",
+    "zope.component",
+    "zope.interface",
+    "zope.publisher",
 ]
 keywords = ["geo", "email", "obfuscation", "Plone", "Zope"]
 
@@ -48,8 +54,11 @@ test = [
     "plone.app.contenttypes",
     "plone.app.robotframework",
     "plone.app.testing",
+    "plone.app.textfield",
+    "plone.registry",
     "plone.testing",
     "robotsuite",
+    "transaction",
     "zope.testrunner",
 ]
 
@@ -181,6 +190,8 @@ Zope = [
 ]
 python-dateutil = ['dateutil']
 pytest-plone = ['pytest', 'zope.pytestlayer', 'plone.testing', 'plone.app.testing']
+ignore-packages = ['lxml', 'plone.app.robotframework', 'zope.testrunner']
+beautifulsoup4 = ['bs4']
 
 ##
 # Add extra configuration options in .meta.toml:
