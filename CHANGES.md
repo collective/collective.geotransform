@@ -1,28 +1,23 @@
-Changelog
-=========
+# Changelog
 
-3.0.1 (unreleased)
-------------------
+## 3.0.1 (unreleased)
 
 - Nothing changed yet.
 
 
-3.0 (2023-02-09)
-----------------
+## 3.0 (2023-02-09)
 
 - Add Plone 6 compatibility, drop Plone 5 support
   [boulch]
 
 
-2.1 (2023-01-31)
-----------------
+## 2.1 (2023-01-31)
 
 - Add support for Python 3 and Plone 5.2.
   [pbauer]
 
 
-2.0 (2020-11-18)
-----------------
+## 2.0 (2020-11-18)
 
 - Fix obfuscation with mails within texts
   [laulaz]
@@ -34,8 +29,7 @@ Changelog
   [laulaz]
 
 
-2.0a1 (2018-09-24)
-------------------
+## 2.0a1 (2018-09-24)
 
 - Plone 5 compatibility
   [tomgross]
@@ -44,8 +38,7 @@ Changelog
   [tomgross]
 
 
-1.0.4 (2020-11-18)
-------------------
+## 1.0.4 (2020-11-18)
 
 - Make mail detection in texts (outside textareas) more robust
   [laulaz]
@@ -54,23 +47,20 @@ Changelog
   [laulaz]
 
 
-1.0.3 (2017-12-06)
-------------------
+## 1.0.3 (2017-12-06)
 
 - Do not obfuscate mails inside textarea or value="" attribute (#15)
   [laulaz]
 
 
-1.0.2 (2016-08-19)
-------------------
+## 1.0.2 (2016-08-19)
 
 - Do not obfuscate mails when called from Ajax, because we don't know if they
   will be de-obfuscated and that the goal is to fool non-Javascript robots
   [laulaz]
 
 
-1.0.1 (2015-02-03)
-------------------
+## 1.0.1 (2015-02-03)
 
 - Add metadata.xml into profile.
   [bsuttor]
@@ -82,8 +72,7 @@ Changelog
   [bsuttor]
 
 
-1.0 (2014-10-22)
-----------------
+## 1.0 (2014-10-22)
 
 - Obfuscate plain text mails (#8)
   [laulaz]
@@ -110,20 +99,17 @@ Changelog
   [laulaz]
 
 
-1.0a3 (2012-08-03)
-------------------
+## 1.0a3 (2012-08-03)
 
 - Fix check for anonymous
   [pbauer]
 
 
-1.0a2 (2010-11-24)
--------------------
+## 1.0a2 (2010-11-24)
 
 - Fixed broken uploaded file to pypi
 
 
-1.0a1 (2010-10-22)
--------------------
+## 1.0a1 (2010-10-22)
 
 - Initial release

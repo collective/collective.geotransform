@@ -1,5 +1,4 @@
 recursive-include collective *
-recursive-include docs *
-include *.py *.txt *.cfg
+include *.md *.py *.txt *.cfg LICENSE.GPL
 include Makefile
 global-exclude *.pyc .installed.cfg

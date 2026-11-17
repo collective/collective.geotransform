@@ -1,13 +1,14 @@
 from setuptools import setup, find_packages
-import os
 
 version = '3.0.1.dev0'
 
 setup(name='collective.geotransform',
       version=version,
       description="Gracefully email obfuscation for Plone",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.md").read() + "\n" +
+                       open("CONTRIBUTORS.md").read() + "\n" +
+                       open("CHANGES.md").read(),
+      long_description_content_type="text/markdown",
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
