@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from collective.geotransform.interfaces import IGeoTransformLayer
 from plone import api
+from plone.base.utils import safe_text
 from plone.transformchain.interfaces import ITransform
-from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapter
 from zope.component.hooks import getSite
 from zope.interface import implementer
@@ -31,7 +31,7 @@ def replaceMailTos(source):
             # base64.b64encode needs bytes in py2 and py3
             address = address.encode("utf8")
         cryptedAddress = base64.b64encode(address)
-        cryptedAddress = safe_unicode(cryptedAddress)
+        cryptedAddress = safe_text(cryptedAddress)
         tag["href"] = "geomailto:%s" % cryptedAddress
         tag["rel"] = "nofollow"
     return str(soup)
@@ -49,8 +49,8 @@ def replaceMails(source):
             if isinstance(mail, str):
                 mail = mail.encode("utf8")
             encryptedMail = base64.b64encode(mail)
-            encryptedMail = safe_unicode(encryptedMail)  # .decode('utf8')
-            mail = safe_unicode(mail)  # .decode('utf8')
+            encryptedMail = safe_text(encryptedMail)  # .decode('utf8')
+            mail = safe_text(mail)  # .decode('utf8')
             newTag = soup.new_tag("span")
             newTag["class"] = "geomailaddress"
             newTag.string = encryptedMail

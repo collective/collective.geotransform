@@ -9,9 +9,9 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.textfield.value import RichTextValue
+from plone.base.interfaces import IFilterSchema
 from plone.registry.interfaces import IRegistry
-from plone.testing import z2
-from Products.CMFPlone.interfaces import IFilterSchema
+from plone.testing.zope import WSGI_SERVER_FIXTURE
 from zope.component import getUtility
 
 import transaction
@@ -71,6 +71,6 @@ COLLECTIVE_GEOTRANSFORM_INTEGRATION_TESTING = IntegrationTesting(
 )
 
 COLLECTIVE_GEOTRANSFORM_ROBOT_TESTING = FunctionalTesting(
-    bases=(COLLECTIVE_GEOTRANSFORM_FIXTURE, z2.ZSERVER_FIXTURE),
+    bases=(COLLECTIVE_GEOTRANSFORM_FIXTURE, WSGI_SERVER_FIXTURE),
     name="CollectiveGeotransform:Robot",
 )
