@@ -1,6 +1,6 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
-version = '3.0.1.dev0'
+version = '4.0.0.dev0'
 
 setup(name='collective.geotransform',
       version=version,
@@ -13,26 +13,25 @@ setup(name='collective.geotransform',
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
-        "Framework :: Plone :: 6.0",
+        "Framework :: Plone :: 6.1",
+        "Framework :: Plone :: 6.2",
         "Framework :: Plone :: Addon",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         ],
       keywords='geo email obfuscation Plone Zope',
       author='Victor Fernandez de Alba',
       author_email='sneridagh@gmail.com',
       url='https://github.com/collective/collective.geotransform',
       license='GPL',
-      packages=find_packages('src', exclude=['ez_setup']),
-      package_dir={'': 'src'},
-      namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
+      python_requires='>=3.10',
       install_requires=[
-          'setuptools',
           'plone.api',
           'plone.transformchain',
           'beautifulsoup4',
