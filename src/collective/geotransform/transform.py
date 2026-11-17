@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 from collective.geotransform.interfaces import IGeoTransformLayer
 from plone import api
@@ -6,12 +5,11 @@ from plone.transformchain.interfaces import ITransform
 from Products.CMFPlone.utils import safe_unicode
 from zope.component import adapter
 from zope.component.hooks import getSite
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 
 import base64
 import re
-import six
 
 emailPattern = r"[A-Z0-9._%\+\-=:]+@[A-Z0-9._%\+\-=:]+\.[A-Z0-9._\+\-=:]+"
 emailRegexp = re.compile(emailPattern, re.I | re.S | re.U)
@@ -25,17 +23,17 @@ def replaceMailTos(source):
     """
     Replace mailto href strings with encrypted geomailto href strings
     """
-    soup = BeautifulSoup(source, 'lxml')
+    soup = BeautifulSoup(source, "lxml")
     mailtoTags = soup.select('a[href^="mailto:"]')
     for tag in mailtoTags:
-        address = tag.get('href')[7:]
-        if isinstance(address, six.text_type):
+        address = tag.get("href")[7:]
+        if isinstance(address, str):
             # base64.b64encode needs bytes in py2 and py3
-            address = address.encode('utf8')
+            address = address.encode("utf8")
         cryptedAddress = base64.b64encode(address)
         cryptedAddress = safe_unicode(cryptedAddress)
-        tag['href'] = "geomailto:%s" % cryptedAddress
-        tag['rel'] = "nofollow"
+        tag["href"] = "geomailto:%s" % cryptedAddress
+        tag["rel"] = "nofollow"
     return str(soup)
 
 
@@ -48,11 +46,11 @@ def replaceMails(source):
     for text in texts:
         mails = emailRegexp.findall(text)
         for mail in mails:
-            if isinstance(mail, six.text_type):
-                mail = mail.encode('utf8')
+            if isinstance(mail, str):
+                mail = mail.encode("utf8")
             encryptedMail = base64.b64encode(mail)
-            encryptedMail = safe_unicode(encryptedMail) # .decode('utf8')
-            mail = safe_unicode(mail) # .decode('utf8')
+            encryptedMail = safe_unicode(encryptedMail)  # .decode('utf8')
+            mail = safe_unicode(mail)  # .decode('utf8')
             newTag = soup.new_tag("span")
             newTag["class"] = "geomailaddress"
             newTag.string = encryptedMail
@@ -63,7 +61,7 @@ def replaceMails(source):
 
 @implementer(ITransform)
 @adapter(Interface, Interface)  # any context, any request
-class emailObfuscatorTransform(object):
+class emailObfuscatorTransform:
     order = 9000
 
     def __init__(self, published, request):
@@ -73,8 +71,8 @@ class emailObfuscatorTransform(object):
     def _cryptAllMails(self, source):
         result = replaceMailTos(source)
         result = replaceMails(result)
-        if isinstance(result, six.text_type):
-            result = result.encode('utf8')
+        if isinstance(result, str):
+            result = result.encode("utf8")
         return result
 
     def applyTransform(self):
@@ -83,10 +81,10 @@ class emailObfuscatorTransform(object):
             return False
         if not IGeoTransformLayer.providedBy(self.request):
             return False
-        responseType = self.request.response.getHeader('content-type') or ''
-        if not responseType.startswith(('text/html', 'text/xhtml')):
+        responseType = self.request.response.getHeader("content-type") or ""
+        if not responseType.startswith(("text/html", "text/xhtml")):
             return False
-        if self.request.getHeader('X-Requested-With', '') == 'XMLHttpRequest':
+        if self.request.getHeader("X-Requested-With", "") == "XMLHttpRequest":
             return False
         return api.user.is_anonymous()
 

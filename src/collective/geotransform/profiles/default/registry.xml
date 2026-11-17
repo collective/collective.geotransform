@@ -1,19 +1,21 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
-<records prefix="plone.bundles/jquery_base64"
-         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-  <value key="depends">plone</value>
-  <value key="enabled">True</value>
-  <value key="jscompilation">++plone++geotransform/jquery.base64.min.js</value>
-  <value key="load_async">False</value>
-  <value key="load_defer">False</value>
-</records>
-<records prefix="plone.bundles/geotransform"
-         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-  <value key="depends">jquery_base64</value>
-  <value key="enabled">True</value>
-  <value key="jscompilation">++plone++geotransform/geoMailDecoder.js</value>
-  <value key="load_async">False</value>
-  <value key="load_defer">False</value>
-</records>
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/jquery_base64"
+  >
+    <value key="depends">plone</value>
+    <value key="enabled">True</value>
+    <value key="jscompilation">++plone++geotransform/jquery.base64.min.js</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">False</value>
+  </records>
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/geotransform"
+  >
+    <value key="depends">jquery_base64</value>
+    <value key="enabled">True</value>
+    <value key="jscompilation">++plone++geotransform/geoMailDecoder.js</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">False</value>
+  </records>
 </registry>
