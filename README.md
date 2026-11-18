@@ -30,7 +30,8 @@ Authenticated responses are NOT affected by this transform. Only anonymous respo
 
 ## Compatibility
 
-Version 4.x supports Plone 6.1 and 6.2, on Python 3.10 to 3.13.
+Version 4.x supports Plone 6.1 on Python 3.10 to 3.13, and Plone 6.2 on Python
+3.10 to 3.14.
 
 Older versions support older Plone versions:
 

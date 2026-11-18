@@ -7,8 +7,8 @@
 
 - Breaking: replace the `pkg_resources` namespace of `collective` with a
   PEP 420 native namespace, and move the package to a `src/` layout.
-  Support Plone 6.1 and 6.2 only, on Python 3.10 to 3.13. Use 3.x for
-  Plone 6.0.
+  Support Plone 6.1 only on Python 3.10 to 3.13, and Plone 6.2 on Python
+  3.10 to 3.14. Use 3.x for Plone 6.0.
   [remdub]
 
 - Import `safe_text`, `IFilterSchema` and `IBundleRegistry` from
