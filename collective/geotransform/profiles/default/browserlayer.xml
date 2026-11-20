@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<layers>
-    <layer name="geotransform"
-        interface="collective.geotransform.interfaces.IGeoTransformLayer" />
-</layers>
