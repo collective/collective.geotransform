@@ -2,7 +2,7 @@
 
 <!-- towncrier release notes start -->
 
-## 4.0.0 (unreleased)
+## 4.0.0 (2026-11-20)
 
 
 - Breaking: replace the `pkg_resources` namespace of `collective` with a

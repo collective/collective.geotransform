@@ -10,7 +10,7 @@ requires = ["setuptools>=68.2,<83", "wheel"]
 
 [project]
 name = "collective.geotransform"
-version = "4.0.0.dev0"
+version = "4.0.0"
 description = "Gracefully email obfuscation for Plone"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
